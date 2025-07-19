@@ -566,33 +566,36 @@
         const container = document.getElementById('stock-list');
         if (container) container.textContent = 'Could not load stock list.';
       
-	// Fetch and display fuel levels
+	// Fetch and display fuel levels (always visible)
 	fetch('https://opensheet.elk.sh/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/Fuel')
-	.then(res => res.json())
-	.then(data => {
-	const container = document.getElementById('fuel-status');
-	if (!container) return;
-	container.innerHTML = '';
+	  .then(res => res.json())
+	  .then(data => {
+	    const container = document.getElementById('fuel-status');
+	    if (!container) return;
+	    container.innerHTML = '';
 	
-	data.forEach(row => {
-	const type = row['Type'];
-	const level = row['Level']?.toLowerCase();
-	if (type && level) {
-	const div = document.createElement('div');
-	div.className = `stock-item ${level === 'low' ? 'low' : level === 'empty' ? 'out' : ''}`;
-	div.textContent = `${type}: ${level.toUpperCase()}`;
-	container.appendChild(div);
-	}
-	});
+	    data.forEach(row => {
+	      const type = row['Type'];
+	      const level = row['Level']?.toLowerCase();
+	      if (type && level) {
+	        const emoji = type.toLowerCase().includes('butane') ? '🧯' : '⛽';
+	        const className = level === 'low' ? 'low' : level === 'empty' ? 'out' : '';
+	        const div = document.createElement('div');
+	        div.className = `stock-item ${className}`;
+	        div.textContent = `${emoji} ${type}: ${level.toUpperCase()}`;
+	        container.appendChild(div);
+	      }
+	    });
 	
-	if (container.innerHTML === '') {
-	container.textContent = 'All fuel levels normal.';
-	}
-	})
-	.catch(() => {
-	const container = document.getElementById('fuel-status');
-	if (container) container.textContent = 'Could not load fuel levels.';
-	});
+	    if (container.innerHTML === '') {
+	      container.textContent = 'All fuel levels normal.';
+	    }
+	  })
+	  .catch(() => {
+	    const container = document.getElementById('fuel-status');
+	    if (container) container.textContent = 'Could not load fuel levels.';
+	  });
+
   </script>
 </body>
 </html>
