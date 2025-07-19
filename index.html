@@ -563,7 +563,6 @@ container.textContent = 'Everything in stock!';
 .catch(() => {																									
 const container = document.getElementById('stock-list');																									
 if (container) container.textContent = 'Could not load stock list.';																									
-});																									
 																									
 // Fetch and display fuel levels																									
 fetch('https://opensheet.elk.sh/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/Fuel')																									
@@ -575,21 +574,23 @@ container.innerHTML = '';
 data.forEach(row => {																									
 const item = row['Item'];																									
 const level = row['Level'];																									
-const emoji = item.toLowerCase().includes('butane') ? '🔥' :																									
-item.toLowerCase().includes('petrol') ? '⛽' : '🔋';																									
+if (item && level) {																									
+const emoji = item.toLowerCase().includes('butane') ? '🟠' :																									
+item.toLowerCase().includes('petrol') ? '🛢️' :																									
+📦';																									
 const div = document.createElement('div');																									
-div.className = 'stock-item';																									
-div.textContent = `${emoji} ${item} : ${level}`;																									
+div.textContent = `${emoji} ${item}: ${level}`;																									
 container.appendChild(div);																									
+}																									
 });																									
+if (container.innerHTML === '') {																									
+container.textContent = 'No fuel data found.';																									
+}																									
 })																									
 .catch(() => {																									
 const container = document.getElementById('fuel-levels');																									
 if (container) container.textContent = 'Could not load fuel levels.';																									
 });																									
 </script>																									
-																									
-																									
-																									
 </body>																									
 </html>																									
