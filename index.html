@@ -565,7 +565,7 @@
       .catch(() => {
         const container = document.getElementById('stock-list');
         if (container) container.textContent = 'Could not load stock list.';
-      });
+      
 	// Fetch and display fuel levels
 	fetch('https://opensheet.elk.sh/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/Fuel')
 	.then(res => res.json())
