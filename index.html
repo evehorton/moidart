@@ -93,8 +93,8 @@
 																									
 	<div class="section" id="planning">																								
 		<div class="card">																							
-			<h2>⛽ Fuel Levels</h2>																						
-			<div id="fuel-status">Loading fuel levels...</div>																						
+			<h2>Fuel Levels</h2>																						
+			<div id="fuel-levels">Loading fuel levels...</div>																						
 		</div>																							
 																									
 																									
@@ -552,7 +552,7 @@ if (level === 'empty' || level === 'low') {
 const className = level === 'empty' ? 'out' : 'low';																									
 const div = document.createElement('div');																									
 div.className = `stock-item ${className}`;																									
-div.textContent = `${item} — ${level.toUpperCase()}`;																									
+div.textContent = `${item} : ${level.toUpperCase()}`;																									
 container.appendChild(div);																									
 }																									
 });																									
@@ -575,9 +575,11 @@ container.innerHTML = '';
 data.forEach(row => {																									
 const item = row['Item'];																									
 const level = row['Level'];																									
+const emoji = item.toLowerCase().includes('butane') ? '🔥' :																									
+item.toLowerCase().includes('petrol') ? '⛽' : '🔋';																									
 const div = document.createElement('div');																									
-div.className = 'stock-item'; // Reuse styles																									
-div.textContent = `${item} — ${level}`;																									
+div.className = 'stock-item';																									
+div.textContent = `${emoji} ${item} : ${level}`;																									
 container.appendChild(div);																									
 });																									
 })																									
@@ -585,11 +587,9 @@ container.appendChild(div);
 const container = document.getElementById('fuel-levels');																									
 if (container) container.textContent = 'Could not load fuel levels.';																									
 });																									
-																									
-																									
-																									
-																									
-																									
 </script>																									
+																									
+																									
+																									
 </body>																									
 </html>																									
