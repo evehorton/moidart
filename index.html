@@ -1,601 +1,1373 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Traigh Bhan Cabin Hub</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #eef1f4;
-      color: #333;
-    }
-    .nav {
-      display: flex;
-      background: #004d40;
-      color: white;
-      justify-content: space-around;
-      padding: 12px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .nav div {
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .section {
-      display: none;
-      padding: 24px 16px;
-    }
-    .section.active {
-      display: block;
-    }
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h2 {
-      margin-top: 0;
-      font-size: 1.5em;
-      color: #2c3e50;
-    }
-    a {
-      color: #00695c;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .stock-item {
-      margin: 6px 0;
-      padding: 6px 10px;
-      border-radius: 4px;
-    }
-    .out {
-      background-color: #fdecea;
-      color: #c0392b;
-    }
-    .low {
-      background-color: #fff4e5;
-      color: #f39c12;
-    }
-    .dropdown-header {
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-    .dropdown-content {
-      display: none;
-      padding-left: 16px;
-    }
-    .dropdown-content.show {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <div class="nav">
-    <div onclick="showSection('planning')">Planning</div>
-    <div onclick="showSection('arrival & setup')">Arrival & Setup</div>
-    <div onclick="showSection('departure')">Departure</div>
-  </div>
-
-  <div class="section" id="planning">
-	<div class="card">
-	  <h2>⛽ Fuel Levels</h2>
-	  <div id="fuel-status">Loading fuel levels...</div>
-	</div>
-</div>	
-	<div class="card">
-      <h2>🛒 Stock List</h2>
-      <div class="dropdown-header" onclick="toggleDropdown('stock-dropdown')">▶ View Items to Bring</div>
-      <div class="dropdown-content" id="stock-dropdown">
-        <p>Check below for current stock levels. Bring any out-of-stock or low items with you.</p>
-        <div id="stock-list">Loading stock list...</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>🎒 Packing List</h2>
-      <div class="dropdown-header" onclick="toggleDropdown('packing-dropdown')">▶ What to Bring</div>
-      <div class="dropdown-content" id="packing-dropdown">
-        <ul>
-          <li>Tea towels</li>
-          <li>Bath towels</li>
-          <li>Sleeping bags or single fitted sheets</li>
-          <li>Pillowcases</li>
-          <li>Duvet covers (single or double)</li>
-        </ul>
-        <p><strong>Note:</strong> Mattresses, pillows, and duvets are already in the cabin.</p>
-        <p>Bedding available includes:</p>
-        <ul>
-          <li>2 double duvets</li>
-          <li>4 single duvets</li>
-          <li>1 zipped sleeping bag</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>🗓️ Booking</h2>
-      <a href="https://timetreeapp.com/" target="_blank">Open TimeTree Booking Calendar</a>
-    </div>
-  </div>
-
-  <div class="section" id="arrival & setup">						
-	<div class="card">						
-    	<h2>💧 Water System</h2>					
-    	<div class="dropdown-header" onclick="toggleDropdown('arrival-water')">▶ View Details</div>					
-    	<div class="dropdown-content" id="arrival-water">					
-  		<p><strong>System Overview</strong></p>				
-  		<ul>				
-  			<li>A diagram of the water system is included in the cabin instructions manual.</li>			
-  			<li>The dam, with two large round water tanks and one small rectangular tank, is upstream (access via the path next to the log seat on the beach).</li>			
-  		</ul>				
-  						
-  		<p><strong>Drinking Water</strong></p>				
-  		<ul>				
-  			<li>The small rectangular tank connects only to the kitchen cold tap.</li>			
-  			<li>This water is not treated, so either:</li>			
-  		<ul>				
-  			<li>Boil and cool it before drinking, or</li>			
-  			<li>Bring your own drinking water</li>			
-  		</ul>				
-  		</ul>				
-  						
-  		<p><strong>Hot Water & Gas</strong></p>				
-  		<ul>				
-  			<li><strong>Boiler:</strong> In the bathroom – Instructions on boiler.</li>			
-  			<li><strong>Showers:</strong> Set to double flame symbol and level 2.</li>			
-  			<li><strong>Kitchen hot water:</strong> Use triple flame symbol and level 3 or 4 if cold.</li>			
-  			<li><strong>Gas Taps:</strong> Taps are off when turned across the pipe, and on when turned along the pipe.</li>			
-  		</ul>				
-  						
-  		<p><strong>Gas Bottles</strong></p>				
-  		<ul>				
-  			<li>Located outside in the cupboard under the porch window.</li>			
-  			<li>Two bottles connected with an auto-changeover valve.</li>			
-  			<li>If gas seems low, try shaking the bottles before swapping.</li>			
-  			<li>Spare bottle: Chained under the deck. Key in drawer beneath bread bin.</li>			
-  			<li>Return empty bottle under the deck and re-chain.</li>			
-  		</ul>				
-  						
-  		<p><strong>Septic Tank</strong></p>				
-  		<ul>				
-  			<li>Flush ONLY toilet roll.</li>			
-  			<li>Use Ecover toilet cleaner only.</li>			
-  		</ul>				
-  						
-  		<p><strong>Troubleshooting</strong></p>				
-  		<ul>				
-  			<li>If the kitchen cold tap runs brown, slows, or stops:</li>			
-  		<ul>				
-  			<li>Check the filter under the cabin (beneath the kitchen window):</li>			
-  		<ul>				
-  			<li>It’s a clear plastic cylinder with a string filter inside.</li>			
-  			<li>Access from outside using the spanner handle labelled and hanging in the porch.</li>			
-  			<li>Spare string filters are in the kitchen sink unit.</li>			
-  			<li>Leave dirty filters out – they are taken away to be cleaned.</li>			
-  		</ul>				
-  			<li>Check the dam intake filter:</li>			
-  		<ul>				
-  			<li>Located inside the bottom of the dam — may be blocked.</li>			
-  			<li>Lower the dam’s water level.</li>			
-  			<li>Turn off the tank outlet.</li>			
-  			<li>Open the dam drain valve.</li>			
-  		</ul>				
-  			<li>Tools required (all in the bathroom tool drawer):</li>			
-  		<ul>				
-  			<li>Valve tops</li>			
-  			<li>Adjustable spanner</li>			
-  			<li>Screwdriver</li>			
-  		</ul>				
-  			<li><strong>Note:</strong> The flow valve between tanks is a screwhead on the pipe — inline = open.</li>			
-  			<li>Drain and clean the tanks — they collect a peaty residue and may need occasional cleaning.</li>			
-  		</ul>				
-  		</ul>				
-  						
-  		<p><strong>Winter Use (November – March)</strong></p>				
-  		<ul>				
-  			<li>The water system is turned off and drained in winter.</li>			
-  			<li>Before turning on, ensure:</li>			
-  		<ul>				
-  			<li>All taps inside the cabin are closed.</li>			
-  			<li>The drain point on the boiler is screwed back in (thin brass vertical fitting).</li>			
-  		</ul>				
-  			<li>To turn water back on:</li>			
-  		<ul>				
-  			<li>Locate the stop tap under the cabin (beneath the kitchen sink).</li>			
-  			<li>Valves to turn on:</li>			
-  		<ul>				
-  			<li>Tap heads for all valves are in the tool drawer in the porch.</li>			
-  			<li>Outlet from the tanks (by the dam)</li>			
-  			<li>Valve under the kitchen window (beneath the back of the cabin)</li>			
-  			<li>Pipe to kitchen cold tap (has the clear filter bottle)</li>			
-  		</ul>				
-  		</ul>				
-  		</ul>				
-  	</div>					
-    </div>						
-    <div class="card">											
-		<h2>🍳 Kitchen</h2>				
-		<div class="dropdown-header" onclick="toggleDropdown('arrival-kitchen')">▶ View Details</div>				
-		<div class="dropdown-content" id="arrival-kitchen">				
-			<p><strong>Hob & Oven</strong></p>			
-			<ul>			
-				<li>Left hob and oven knobs must be held pushed in for 30 seconds to light (no ignition).</li>		
-				<li>Grill: One of the two left knobs.</li>		
-				<li>Oven: Right-hand knob.</li>		
-			</ul>			
-						
-			<p><strong>Fridge</strong></p>			
-			<ul>			
-				<li>Lighting instructions are attached to the top.</li>		
-				<li>Manual is in the instruction file on the shelf (next to the clock).</li>		
-			</ul>			
-						
-			<p><strong>Washing Up</strong></p>			
-			<ul>			
-				<li>Use Ecover only, due to the septic tank.</li>		
-			</ul>			
-						
-			<p><strong>Cupboards</strong></p>			
-			<ul>			
-				<li>End cupboard (by post): Empty, for guest food storage.</li>		
-				<li>Corner cupboard (by fridge): Basic communal supplies (oil, tea, coffee, etc).</li>		
-				<li>Three double cupboards:</li>		
-			<ul>			
-				<li>Right-hand: Helen & Martin</li>		
-				<li>Middle: Wenda & Matthew</li>		
-				<li>Left-hand: Caroline & Rob</li>		
-			</ul>			
-				<li>Use of supplies is fine, but please let the owners know if you do.</li>		
-				<li>Please do not leave any of your own supplies in these cupboards, especially open packets — they become overcrowded.</li>		
-			</ul>			
-						
-			<p><strong>Window Lock Key</strong></p>			
-			<ul>			
-				<li>Located on a nail to the right of the hobs. It has a dark blue plastic top.</li>		
-			</ul>			
-						
-			<p><strong>Rubbish & Compost</strong></p>			
-			<ul>			
-				<li><strong>Rubbish:</strong> must be carried out — Acharacle only has a small public bin — take your rubbish home.</li>		
-				<li><strong>Compost:</strong> Use the grey pedal bin: Compost heap is behind a rock beyond the shed behind the cabin.</li>		
-				<li><strong>Paper/Cardboard:</strong> Burn on the beach below the high tide line, or in the stove (if using the stove, empty the ash pan onto the compost).</li>		
-				<li>Do not leave paper rubbish — mice use it for nesting.</li>		
-			</ul>			
-						
-			<p><strong>Mice</strong></p>			
-			<ul>			
-				<li>If you find mouse droppings, sorry — they tend not to appear while people are present.</li>		
-				<li>We now store most utensils in cupboards/drawers instead of leaving them out.</li>		
-				<li>Always put food away at night and leave surfaces clean.</li>		
-				<li>Before leaving: ensure no food is accessible, and empty all bins, including compost.</li>		
-			</ul>			
-						
-		</div>				
-	</div>					
-	<div class="card">					
-		<h2>🔌 Electrics & Lighting</h2>				
-		<div class="dropdown-header" onclick="toggleDropdown('arrival-electrics')">▶ View Details</div>				
-		<div class="dropdown-content" id="arrival-electrics">				
-						
-			<p><strong>Battery System</strong></p>			
-			<ul>			
-				<li>Batteries are located in the tall cupboard in the porch.</li>		
-				<li>They charge from the solar panel (always active) and the wind turbine.</li>		
-				<li>There is a brake switch to protect the turbine’s bearings in high wind:</li>		
-			<ul>			
-				<li>On arrival: Turn the brake off so the turbine can charge.</li>		
-				<li>During gales: Use the brake.</li>		
-				<li>Before leaving: Ensure the brake is on.</li>		
-			</ul>			
-			</ul>			
-						
-			<p><strong>Isolator Switch</strong></p>			
-			<ul>			
-				<li>Red switch on the outside of the battery cupboard.</li>		
-				<li>Should be off when you arrive — turn it on to power the lights and USB sockets by the daybed (beside the map box).</li>		
-			</ul>			
-						
-			<p><strong>Inverter & Sockets</strong></p>			
-			<ul>			
-				<li>Inverter is located below the batteries and powers the extension lead on the long kitchen counter.</li>		
-				<li>Only plug in and switch on the inverter when needed.</li>		
-				<li>The inverter drains batteries and interferes with radios — switch it off and unplug the lead when not in use.</li>		
-				<li>The inverter switch is below the isolator switch on the cupboard exterior.</li>		
-				<li>If battery power is low, the inverter will emit a warning sound.</li>		
-			</ul>			
-						
-			<p><strong>Low-Power Charging Option</strong></p>			
-			<ul>			
-				<li>A 12V car-style socket by the end of the sofa bed is suitable for phone chargers and uses less power than the inverter.</li>		
-			</ul>			
-						
-			<p><strong>Gaslights & Lighting</strong></p>			
-			<ul>			
-				<li>Gaslights: Be extremely careful not to touch the mantles — they are fragile and hard to replace.</li>		
-				<li>Use a taper or long match (in kitchen drawer) to light.</li>		
-			</ul>			
-						
-			<p><strong>USB & Solar Lights</strong></p>			
-			<ul>			
-				<li>The little USB light above the table is rechargeable and portable — great light quality.</li>		
-				<li>Solar lights stored upstairs work well — bring them downstairs if needed.</li>		
-			</ul>			
-		</div>				
-	</div>
-    <div class="card">						
-      	<h2>🚤 Boats & Engines</h2>					
-    	<div class="dropdown-header" onclick="toggleDropdown('arrival-boats')">▶ View Details</div>					
-    	<div class="dropdown-content" id="arrival-boats">					
-    		<p><strong>Tide Caution</strong></p>				
-    		<ul>				
-    			<li>During high tides (especially at night), always pull the dinghies up to the grass and tie them to both the trailer and the tree.</li>			
-    		</ul>				
-    						
-    		<p><strong>Safety Equipment</strong></p>				
-    		<ul>				
-    			<li>Always carry a bailer and sponge in each dinghy.</li>			
-    			<li>Adult and children’s life jackets are stored on the rack in the porch.</li>			
-    		</ul>				
-    						
-    		<p><strong>Tioram (Aluminium Rowboat)</strong></p>				
-    		<ul>				
-    			<li>Oars with captive rowlocks are in the shed.</li>			
-    			<li>Fit rowlocks by pointing the oar forward so the lug on the rowlock aligns with the groove in the slot — they are fragile — tie them with cord to avoid losing them overboard.</li>			
-    			<li>Ensure the white plastic drain bung (rear of the boat) is screwed in or the boat will fill with water.</li>			
-    			<li>Slatted floorboards (three for Tioram) are in the shed or boats — place inside when using for a flat floor and hull protection.</li>			
-    		</ul>				
-    						
-    		<p><strong>Shona (Wooden Dinghy)</strong></p>				
-    		<ul>				
-    			<li>Rowlocks hang inside the cabin, named on the side.</li>			
-    			<li>Long wooden oars are nearby.</li>			
-    			<li>Spare oars and rowlocks are in the shed.</li>			
-    		</ul>				
-    						
-    		<p><strong>Outboard Engines</strong></p>				
-    						
-    		<p><strong>Large Tohatsu (Unleaded Petrol)</strong></p>				
-    		<ul>				
-    			<li>Uses standard unleaded petrol.</li>			
-    			<li>Most powerful engine — best suited for Shona and Tioram.</li>			
-    			<li>Always take spare petrol with you.</li>			
-    		</ul>				
-    						
-    		<p><strong>Small Tohatsu (Petrol + Oil Mix)</strong></p>				
-    		<ul>				
-    			<li>Requires 50:1 fuel mix — 50 parts petrol to 1 part oil.</li>			
-    			<li>Oil is stored in the shed alongside the engine.</li>			
-    			<li>Less powerful — suitable for inflatables and plastic boat.</li>			
-    			<li>Consider taking this engine as a spare for longer trips.</li>			
-    		</ul>				
-    						
-    		<p><strong>Engine Use & Safety</strong></p>				
-    		<ul>				
-    			<li>Tie the engine onto the boat using a cord to prevent it being dropped overboard.</li>			
-    			<li>Always use the red emergency stop spiral line, clipped to the driver.</li>			
-    		</ul>				
-    						
-    		<p><strong>Cooling System Check</strong></p>				
-    		<ul>				
-    			<li>When running, there should be a steady stream of seawater from the coolant outlet (located above water level on the shaft).</li>			
-    			<li>If the stream is intermittent or absent, the intake may be blocked (e.g., with seaweed).</li>			
-    			<li>Use the piece of wire attached to the large Tohatsu to clear the intake (a rubber tube inside the propeller shaft).</li>			
-    		</ul>				
-    						
-    		<p><strong>Use with Shona (Wooden Boat)</strong></p>				
-    		<ul>				
-    			<li>Place the plywood boards marked “Shona” on either side of the boat’s transom (rear) to prevent the outboard fixings from damaging the wood.</li>			
-    		</ul>				
-    						
-    		<p><strong>After Use Maintenance</strong></p>				
-    		<ul>				
-    			<li>Run the outboard through fresh water (using the tank and hose) to flush out salt.</li>			
-    			<li>While flushing, switch off the fuel supply to allow the carburettor to drain.</li>			
-    		</ul>				
-    	</div>
-      </div>
-    <div class="card">				
-    	<h2>📖 Log Book & Manuals</h2>			
-    	<div class="dropdown-header" onclick="toggleDropdown('arrival-logbook')">▶ View Details</div>			
-    	<div class="dropdown-content" id="arrival-logbook">			
-    		<ul>		
-    		<li>The log book/diary is kept either on the windowsill or in the hamper.</li>		
-    		<li>A copy of these notes and the ‘Cabin Departure Checklist’ instructions should be inside it.</li>		
-    		<li>Please add an entry to confirm your visit — this helps with insurance purposes.</li>		
-    		<li>A folder of manuals is kept on the shelf.</li>		
-    		</ul>		
-  	</div>			
-  </div>				
-</div>						
-						
-</div>						
-
-  <div class="section" id="departure">
-     <div class="card">			
-    	<h2>✅ Cabin Departure Checklist</h2>		
-    	<div class="dropdown-header" onclick="toggleDropdown('departure-checklist')">▶ View Details</div>		
-    	<div class="dropdown-content" id="departure-checklist">		
-    		<p>To help keep the cabin stocked and functional for everyone, please run through the following before you leave:</p>	
-    			
-    		<p><strong>Bedding</strong></p>	
-    		<ul>	
-    			<li>Strip used bedding.</li>
-    			<li>Stack mattresses upright and apart to air.</li>
-    			<li>Stack duvets, pillows, etc. over the beams as found.</li>
-    			<li>Close all upper windows.</li>
-    		</ul>	
-    			
-    		<p><strong>Kitchen</strong></p>	
-    		<ul>	
-    			<li>Turn off the fridge tap (on the line under the hob).</li>
-    			<li>Clean out the fridge and leave the door vent open to prevent mould.</li>
-    			<li>Empty all rubbish:</li>
-    		<ul>	
-    			<li>Compost → heap behind the rock near the fuel shed.</li>
-    			<li>Burnable paper/card → burn on the beach below the high tide line.</li>
-    			<li>Everything else → take away with you (mice use rubbish for bedding).</li>
-    		</ul>	
-    			<li>Store boxes of tissues in the bathroom cupboard (to deter mice).</li>
-    			<li>Do not leave perishables out. Only sealed, unopened food may stay in cupboards.</li>
-    			<li>Clean out the stove and empty the ash tray onto the compost heap.</li>
-    			<li>Refill logs, kindling, and smokeless fuel for the next visitors.</li>
-    			<li>Please leave the kitchen and cabin clean and tidy — as you'd like to find it.</li>
-    		</ul>	
-    			
-    		<p><strong>Porch & Bathroom</strong></p>	
-    		<ul>	
-    			<li>Turn off the boiler at the control knob.</li>
-    			<li>In the gas cupboard, turn the valve to disconnect the gas bottles.</li>
-    			<li><em>(Winter only):</em> Drain the boiler using the labelled drain point — use a bucket.</li>
-    			<li>In the tall battery cupboard:</li>
-    		<ul>	
-    			<li>Switch on the brake for the wind generator (labelled panel above batteries).</li>
-    			<li>Turn the isolator switch on the outside of the cupboard to OFF.</li>
-    		</ul>	
-    			<li>Lock and bolt the back door, and shut the window.</li>
-    			<li>Hang the shower curtain over the rail.</li>
-    			<li>Lock the porch door from inside the cabin, and leave the key in the drawer.</li>
-    		</ul>	
-    			
-    		<p><strong>Boats & Outboard</strong></p>	
-    		<ul>	
-    			<li>Ensure all boats are padlocked.</li>
-    			<li><strong>Tioram:</strong></li>
-    		<ul>	
-    			<li>Pull up under the deck, bung out, and rinse with fresh water.</li>
-    			<li>Run cable and padlock through the trolley, loop around one of the bench seats inside.</li>
-    			<li>Prop the trolley so the weight is off the tyre and angled to drain via the bung.</li>
-    		</ul>	
-    			<li>If an outboard was used, run it through with fresh water using the hose to clear salt from the system.</li>
-    		</ul>	
-    			
-    		<p><strong>Quad Bike</strong></p>	
-    		<ul>	
-    			<li>Rinse the quad (and trailer, if used) with the hose.</li>
-    			<li>Apply WD40 to working parts underneath.</li>
-    			<li>Lock using the cable around the axle and pillar.</li>
-    			<li>Replace the cover and straps as found.</li>
-    		</ul>	
-    			
-    		<p><strong>🔐 Final Checks</strong></p>	
-    		<ul>	
-    			<li>Lock the shed.</li>
-    			<li>Clean, lock, and cover the quad.</li>
-    			<li>Drop the latch on the main door and use the deadlock.</li>
-    		</ul>	
-    	</div>		
-      </div>			
-      <div class="card">		
-        <h2>❗ Essentials</h2>
-      		<p><strong>Gas Bottles (Butane/Propane)</strong></p>	
-      		<ul>	
-      			<li>If you empty a bottle or notice one is low, please take it with you to refill or let the group know.</li>
-      			<li>Always leave a note in the group chat with how many full/empty bottles are on-site.</li>
-      		</ul>	
-      			
-      		<p><strong>Petrol for the Outboard Motor</strong></p>	
-      		<ul>	
-      			<li>If you use petrol, please top up what you can.</li>
-      			<li>Petrol degrades over time — ideally bring it in and out as needed.</li>
-      			<li>If there’s any left, note the amount in the group chat for the next person.</li>
-      		</ul>	
-      			
-      		<p><strong>General Supplies</strong></p>	
-      		<ul>	
-      			<li>If essentials like toilet paper, matches, or kindling are low, let the group know.</li>
-      			<li>Leave the cabin stocked as best you can for the next visitor.</li>
-      		</ul>	
-      			
-      	      <a href="https://docs.google.com/spreadsheets/d/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/edit?gid=121516545#gid=121516545" target="_blank">📊 Update Stock List</a>		
-      	</div>		
-      </div>						
-</div>			
-  </div>
-
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      const el = document.getElementById(id);
-      if (el) el.classList.add('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => showSection('planning'));
-
-    function toggleDropdown(id) {
-      const content = document.getElementById(id);
-      if (content) content.classList.toggle('show');
-    }
-
-    // Fetch and display stock
-    fetch('https://opensheet.elk.sh/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/Stock%20Take')
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById('stock-list');
-        if (!container) return;
-        container.innerHTML = '';
-        data.forEach(row => {
-          const level = row['Level']?.toLowerCase();
-          const item = row['Item'];
-          if (level === 'empty' || level === 'low') {
-            const className = level === 'empty' ? 'out' : 'low';
-            const div = document.createElement('div');
-            div.className = `stock-item ${className}`;
-            div.textContent = `${item} — ${level.toUpperCase()}`;
-            container.appendChild(div);
-          }
-        });
-        if (container.innerHTML === '') {
-          container.textContent = 'Everything in stock!';
-        }
-      })
-      .catch(() => {
-        const container = document.getElementById('stock-list');
-        if (container) container.textContent = 'Could not load stock list.';
-      
-	// Fetch and display fuel levels (always visible)
-	fetch('https://opensheet.elk.sh/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/Fuel')
-	  .then(res => res.json())
-	  .then(data => {
-	    const container = document.getElementById('fuel-status');
-	    if (!container) return;
-	    container.innerHTML = '';
-	
-	    data.forEach(row => {
-	      const type = row['Type'];
-	      const level = row['Level']?.toLowerCase();
-	      if (type && level) {
-	        const emoji = type.toLowerCase().includes('butane') ? '🧯' : '⛽';
-	        const className = level === 'low' ? 'low' : level === 'empty' ? 'out' : '';
-	        const div = document.createElement('div');
-	        div.className = `stock-item ${className}`;
-	        div.textContent = `${emoji} ${type}: ${level.toUpperCase()}`;
-	        container.appendChild(div);
-	      }
-	    });
-	
-	    if (container.innerHTML === '') {
-	      container.textContent = 'All fuel levels normal.';
-	    }
-	  })
-	  .catch(() => {
-	    const container = document.getElementById('fuel-status');
-	    if (container) container.textContent = 'Could not load fuel levels.';
-	  });
-
-  </script>
-</body>
-</html>
+<!DOCTYPE html>																									
+<html lang="en">																									
+<head>																									
+	<meta charset="UTF-8" />																								
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />																								
+	<title>Traigh Bhan Cabin Hub</title>																								
+	<style>																								
+		body {																							
+			font-family: system-ui, sans-serif;																						
+			margin: 0;																						
+			padding: 0;																						
+			background-color: #eef1f4;																						
+			color: #333;																						
+		}																							
+		.nav {																							
+			display: flex;																						
+			background: #004d40;																						
+			color: white;																						
+			justify-content: space-around;																						
+			padding: 12px 0;																						
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1);																						
+			position: sticky;																						
+			top: 0;																						
+			z-index: 10;																						
+		}																							
+		.nav div {																							
+			cursor: pointer;																						
+			font-weight: 500;																						
+		}																							
+		.section {																							
+			display: none;																						
+			padding: 24px 16px;																						
+		}																							
+		.section.active {																							
+			display: block;																						
+		}																							
+		.card {																							
+			background: white;																						
+			padding: 24px;																						
+			border-radius: 12px;																						
+			margin-bottom: 24px;																						
+			box-shadow: 0 4px 12px rgba(0,0,0,0.05);																						
+			max-width: 700px;																						
+			margin-left: auto;																						
+			margin-right: auto;																						
+		}																							
+		h2 {																							
+			margin-top: 0;																						
+			font-size: 1.5em;																						
+			color: #2c3e50;																						
+		}																							
+		a {																							
+			color: #00695c;																						
+			text-decoration: none;																						
+			font-weight: 500;																						
+		}																							
+		a:hover {																							
+			text-decoration: underline;																						
+		}																							
+		.stock-item {																							
+			margin: 6px 0;																						
+			padding: 6px 10px;																						
+			border-radius: 4px;																						
+		}																							
+		.out {																							
+			background-color: #fdecea;																						
+			color: #c0392b;																						
+		}																							
+		.low {																							
+			background-color: #fff4e5;																						
+			color: #f39c12;																						
+		}																							
+		.dropdown-header {																							
+			font-weight: bold;																						
+			cursor: pointer;																						
+			margin-bottom: 10px;																						
+		}																							
+		.dropdown-content {																							
+			display: none;																						
+			padding-left: 16px;																						
+		}																							
+		.dropdown-content.show {																							
+			display: block;																						
+		}																							
+	</style>																								
+</head>																									
+<body>																									
+	<div class="nav">																								
+		<div onclick="showSection('planning')">Planning</div>																							
+		<div onclick="showSection('arrival')">Arrival</div>																							
+		<div onclick="showSection('departure')">Departure</div>																							
+	</div>																								
+																									
+	<div class="section" id="planning">																								
+		<div class="card">																							
+			<h2>⛽ Fuel Levels</h2>																						
+				<div id="fuel-status">																					
+				Loading fuel levels...																					
+			</div>																						
+		</div>																							
+		<div class="card">																							
+			<h2>🛒 Stock List</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('stock-dropdown')">▶ View Items to Bring</div>																						
+			<div class="dropdown-content" id="stock-dropdown">																						
+				<p>Check below for current stock levels. Bring any out-of-stock or low items with you.</p>																					
+				<div id="stock-list">Loading stock list...</div>																					
+			</div>																						
+		</div>																							
+																									
+		<div class="card">																							
+			<h2>🎒 Packing List</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('packing-dropdown')">▶ What to Bring</div>																						
+			<div class="dropdown-content" id="packing-dropdown">																						
+				<ul>																					
+					<li>Tea towels</li>																				
+					<li>Bath towels</li>																				
+					<li>Sleeping bags or single fitted sheets</li>																				
+					<li>Pillowcases</li>																				
+					<li>Duvet covers (single or double)</li>																				
+				</ul>																					
+				<p><strong>Note:</strong> Mattresses, pillows, and duvets are already in the cabin.</p>																					
+				<p>Bedding available includes:</p>																					
+				<ul>																					
+					<li>2 double duvets</li>																				
+					<li>4 single duvets</li>																				
+					<li>1 zipped sleeping bag</li>																				
+				</ul>																					
+			</div>																						
+		</div>																							
+																									
+		<div class="card">																							
+			<h2>🗓️ Booking</h2>																						
+			<a href="https://timetreeapp.com/" target="_blank">Open TimeTree Booking Calendar</a>																						
+		</div>																							
+	</div>																								
+																									
+	<div class="section" id="arrival">																								
+		<div class="card">																							
+			<h2>💧 Water System</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('arrival-water')">▶ View Details</div>																						
+			<div class="dropdown-content" id="arrival-water">																						
+				<p><strong>📘 System Overview</strong></p>																					
+				<ul>																					
+					<li>A diagram of the water system is included in the cabin instructions manual.</li>																				
+					<li>The dam, with two large round water tanks and one small rectangular tank, is upstream (access via the path next to the log seat on the beach).</li>																				
+				</ul>																					
+																									
+				<p><strong>💧 Drinking Water</strong></p>																					
+				<ul>																					
+					<li>The small rectangular tank connects only to the kitchen cold tap.</li>																				
+					<li>This water is not treated, so either:</li>																				
+				<ul>																					
+					<li>Boil and cool it before drinking, or</li>																				
+					<li>Bring your own drinking water</li>																				
+				</ul>																					
+				</ul>																					
+																									
+				<p><strong>🔥 Hot Water & Gas</strong></p>																					
+				<ul>																					
+					<li><strong>Boiler:</strong> In the bathroom – Instructions on boiler.</li>																				
+					<li><strong>Showers:</strong> Set to double flame symbol and level 2.</li>																				
+					<li><strong>Kitchen hot water:</strong> Use triple flame symbol and level 3 or 4 if cold.</li>																				
+					<li><strong>Gas Taps:</strong> Taps are off when turned across the pipe, and on when turned along the pipe.</li>																				
+				</ul>																					
+																									
+				<p><strong>🏺 Gas Bottles</strong></p>																					
+				<ul>																					
+					<li>Located outside in the cupboard under the porch window.</li>																				
+					<li>Two bottles connected with an auto-changeover valve.</li>																				
+					<li>If gas seems low, try shaking the bottles before swapping.</li>																				
+					<li>Spare bottle: Chained under the deck. Key in drawer beneath bread bin.</li>																				
+					<li>Return empty bottle under the deck and re-chain.</li>																				
+				</ul>																					
+																									
+				<p><strong>🚽 Septic Tank</strong></p>																					
+				<ul>																					
+					<li>Flush ONLY toilet roll.</li>																				
+					<li>Use Ecover toilet cleaner only.</li>																				
+				</ul>																					
+																									
+				<p><strong>🛠️ Troubleshooting</strong></p>																					
+				<ul>																					
+					<li>If the kitchen cold tap runs brown, slows, or stops:</li>																				
+				<ul>																					
+					<li>Check the filter under the cabin (beneath the kitchen window):</li>																				
+				<ul>																					
+					<li>It’s a clear plastic cylinder with a string filter inside.</li>																				
+					<li>Access from outside using the spanner handle labelled and hanging in the porch.</li>																				
+					<li>Spare string filters are in the kitchen sink unit.</li>																				
+					<li>Leave dirty filters out – they are taken away to be cleaned.</li>																				
+				</ul>																					
+					<li>Check the dam intake filter:</li>																				
+				<ul>																					
+					<li>Located inside the bottom of the dam — may be blocked.</li>																				
+					<li>Lower the dam’s water level.</li>																				
+					<li>Turn off the tank outlet.</li>																				
+					<li>Open the dam drain valve.</li>																				
+				</ul>																					
+					<li>Tools required (all in the bathroom tool drawer):</li>																				
+				<ul>																					
+					<li>Valve tops</li>																				
+					<li>Adjustable spanner</li>																				
+					<li>Screwdriver</li>																				
+				</ul>																					
+					<li><strong>Note:</strong> The flow valve between tanks is a screwhead on the pipe — inline = open.</li>																				
+					<li>Drain and clean the tanks — they collect a peaty residue and may need occasional cleaning.</li>																				
+				</ul>																					
+				</ul>																					
+																									
+				<p><strong>❄️ Winter Use (November – March)</strong></p>																					
+				<ul>																					
+					<li>The water system is turned off and drained in winter.</li>																				
+					<li>Before turning on, ensure:</li>																				
+				<ul>																					
+					<li>All taps inside the cabin are closed.</li>																				
+					<li>The drain point on the boiler is screwed back in (thin brass vertical fitting).</li>																				
+				</ul>																					
+					<li>To turn water back on:</li>																				
+				<ul>																					
+					<li>Locate the stop tap under the cabin (beneath the kitchen sink).</li>																				
+					<li>Valves to turn on:</li>																				
+				<ul>																					
+					<li>Tap heads for all valves are in the tool drawer in the porch.</li>																				
+					<li>Outlet from the tanks (by the dam)</li>																				
+					<li>Valve under the kitchen window (beneath the back of the cabin)</li>																				
+					<li>Pipe to kitchen cold tap (has the clear filter bottle)</li>																				
+				</ul>																					
+				</ul>																					
+				</ul>																					
+			</div>																						
+		</div>																							
+		<div class="card">																							
+			<h2>🍳 Kitchen</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('arrival-kitchen')">▶ View Details</div>																						
+			<div class="dropdown-content" id="arrival-kitchen">																						
+				<p><strong>🔥 Hob & Oven</strong></p>																					
+				<ul>																					
+					<li>Left hob and oven knobs must be held pushed in for 30 seconds to light (no ignition).</li>																				
+					<li>Grill: One of the two left knobs.</li>																				
+					<li>Oven: Right-hand knob.</li>																				
+				</ul>																					
+																									
+				<p><strong>❄️ Fridge</strong></p>																					
+				<ul>																					
+					<li>Lighting instructions are attached to the top.</li>																				
+					<li>Manual is in the instruction file on the shelf (next to the clock).</li>																				
+				</ul>																					
+																									
+				<p><strong>🧼 Washing Up</strong></p>																					
+				<ul>																					
+					<li>Use Ecover only, due to the septic tank.</li>																				
+				</ul>																					
+																									
+				<p><strong>🚪 Cupboards</strong></p>																					
+				<ul>																					
+					<li>End cupboard (by post): Empty, for guest food storage.</li>																				
+					<li>Corner cupboard (by fridge): Basic communal supplies (oil, tea, coffee, etc).</li>																				
+					<li>Three double cupboards:</li>																				
+				<ul>																					
+					<li>Right-hand: Helen & Martin</li>																				
+					<li>Middle: Wenda & Matthew</li>																				
+					<li>Left-hand: Caroline & Rob</li>																				
+				</ul>																					
+					<li>Use of supplies is fine, but please let the owners know if you do.</li>																				
+					<li>Please do not leave any of your own supplies in these cupboards, especially open packets — they become overcrowded.</li>																				
+				</ul>																					
+																									
+				<p><strong>🔐 Window Lock Key</strong></p>																					
+				<ul>																					
+					<li>Located on a nail to the right of the hobs. It has a dark blue plastic top.</li>																				
+				</ul>																					
+																									
+				<p><strong>🗑️ Rubbish & Compost</strong></p>																					
+				<ul>																					
+					<li><strong>Rubbish:</strong> must be carried out — Acharacle only has a small public bin — take your rubbish home.</li>																				
+					<li><strong>Compost:</strong> Use the grey pedal bin: Compost heap is behind a rock beyond the shed behind the cabin.</li>																				
+					<li><strong>Paper/Cardboard:</strong> Burn on the beach below the high tide line, or in the stove (if using the stove, empty the ash pan onto the compost).</li>																				
+					<li>Do not leave paper rubbish — mice use it for nesting.</li>																				
+				</ul>																					
+																									
+				<p><strong>🐭 Mice</strong></p>																					
+				<ul>																					
+					<li>If you find mouse droppings, sorry — they tend not to appear while people are present.</li>																				
+					<li>We now store most utensils in cupboards/drawers instead of leaving them out.</li>																				
+					<li>Always put food away at night and leave surfaces clean.</li>																				
+					<li>Before leaving: ensure no food is accessible, and empty all bins, including compost.</li>																				
+				</ul>																					
+																									
+			</div>																						
+		</div>																							
+		<div class="card">																							
+			<h2>🔌 Electrics & Lighting</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('arrival-electrics')">▶ View Details</div>																						
+			<div class="dropdown-content" id="arrival-electrics">																						
+																									
+				<p><strong>🔋 Battery System</strong></p>																					
+				<ul>																					
+					<li>Batteries are located in the tall cupboard in the porch.</li>																				
+					<li>They charge from the solar panel (always active) and the wind turbine.</li>																				
+					<li>There is a brake switch to protect the turbine’s bearings in high wind:</li>																				
+				<ul>																					
+					<li>On arrival: Turn the brake off so the turbine can charge.</li>																				
+					<li>During gales: Use the brake.</li>																				
+					<li>Before leaving: Ensure the brake is on.</li>																				
+				</ul>																					
+				</ul>																					
+																									
+				<p><strong>🟥 Isolator Switch</strong></p>																					
+				<ul>																					
+					<li>Red switch on the outside of the battery cupboard.</li>																				
+					<li>Should be off when you arrive — turn it on to power the lights and USB sockets by the daybed (beside the map box).</li>																				
+				</ul>																					
+																									
+				<p><strong>⚡ Inverter & Sockets</strong></p>																					
+				<ul>																					
+					<li>Inverter is located below the batteries and powers the extension lead on the long kitchen counter.</li>																				
+					<li>Only plug in and switch on the inverter when needed.</li>																				
+					<li>The inverter drains batteries and interferes with radios — switch it off and unplug the lead when not in use.</li>																				
+					<li>The inverter switch is below the isolator switch on the cupboard exterior.</li>																				
+					<li>If battery power is low, the inverter will emit a warning sound.</li>																				
+				</ul>																					
+																									
+				<p><strong>🔌 Low-Power Charging Option</strong></p>																					
+				<ul>																					
+					<li>A 12V car-style socket by the end of the sofa bed is suitable for phone chargers and uses less power than the inverter.</li>																				
+				</ul>																					
+																									
+				<p><strong>💡 Gaslights & Lighting</strong></p>																					
+				<ul>																					
+					<li>Gaslights: Be extremely careful not to touch the mantles — they are fragile and hard to replace.</li>																				
+					<li>Use a taper or long match (in kitchen drawer) to light.</li>																				
+				</ul>																					
+																									
+				<p><strong>🔦 USB & Solar Lights</strong></p>																					
+				<ul>																					
+					<li>The little USB light above the table is rechargeable and portable — great light quality.</li>																				
+					<li>Solar lights stored upstairs work well — bring them downstairs if needed.</li>																				
+				</ul>																					
+			</div>																						
+		</div>																							
+		<div class="card">																							
+			<h2>🚤 Boats & Engines</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('arrival-boats')">▶ View Details</div>																						
+			<div class="dropdown-content" id="arrival-boats">																						
+				<p><strong>🌊 Tide Caution</strong></p>																					
+				<ul>																					
+					<li>During high tides (especially at night), always pull the dinghies up to the grass and tie them to both the trailer and the tree.</li>																				
+				</ul>																					
+																									
+				<p><strong>🦺 Safety Equipment</strong></p>																					
+				<ul>																					
+					<li>Always carry a bailer and sponge in each dinghy.</li>																				
+					<li>Adult and children’s life jackets are stored on the rack in the porch.</li>																				
+				</ul>																					
+																									
+				<p><strong>🛶 Tioram (Aluminium Rowboat)</strong></p>																					
+				<ul>																					
+					<li>Oars with captive rowlocks are in the shed.</li>																				
+					<li>Fit rowlocks by pointing the oar forward so the lug on the rowlock aligns with the groove in the slot — they are fragile — tie them with cord to avoid losing them overboard.</li>																				
+					<li>Ensure the white plastic drain bung (rear of the boat) is screwed in or the boat will fill with water.</li>																				
+					<li>Slatted floorboards (three for Tioram) are in the shed or boats — place inside when using for a flat floor and hull protection.</li>																				
+				</ul>																					
+																									
+				<p><strong>🪵 Shona (Wooden Dinghy)</strong></p>																					
+				<ul>																					
+					<li>Rowlocks hang inside the cabin, named on the side.</li>																				
+					<li>Long wooden oars are nearby.</li>																				
+					<li>Spare oars and rowlocks are in the shed.</li>																				
+				</ul>																					
+																									
+				<p><strong>⚙️ Outboard Engines</strong></p>																					
+																									
+				<p><strong>🛢️ Large Tohatsu (Unleaded Petrol)</strong></p>																					
+				<ul>																					
+					<li>Uses standard unleaded petrol.</li>																				
+					<li>Most powerful engine — best suited for Shona and Tioram.</li>																				
+					<li>Always take spare petrol with you.</li>																				
+				</ul>																					
+																									
+				<p><strong>🛢️ Small Tohatsu (Petrol + Oil Mix)</strong></p>																					
+				<ul>																					
+					<li>Requires 50:1 fuel mix — 50 parts petrol to 1 part oil.</li>																				
+					<li>Oil is stored in the shed alongside the engine.</li>																				
+					<li>Less powerful — suitable for inflatables and plastic boat.</li>																				
+					<li>Consider taking this engine as a spare for longer trips.</li>																				
+				</ul>																					
+																									
+				<p><strong>🛟 Engine Use & Safety</strong></p>																					
+				<ul>																					
+					<li>Tie the engine onto the boat using a cord to prevent it being dropped overboard.</li>																				
+					<li>Always use the red emergency stop spiral line, clipped to the driver.</li>																				
+				</ul>																					
+																									
+				<p><strong>💧 Cooling System Check</strong></p>																					
+				<ul>																					
+					<li>When running, there should be a steady stream of seawater from the coolant outlet (located above water level on the shaft).</li>																				
+					<li>If the stream is intermittent or absent, the intake may be blocked (e.g., with seaweed).</li>																				
+					<li>Use the piece of wire attached to the large Tohatsu to clear the intake (a rubber tube inside the propeller shaft).</li>																				
+				</ul>																					
+																									
+				<p><strong>🪵 Use with Shona (Wooden Boat)</strong></p>																					
+				<ul>																					
+					<li>Place the plywood boards marked “Shona” on either side of the boat’s transom (rear) to prevent the outboard fixings from damaging the wood.</li>																				
+				</ul>																					
+																									
+				<p><strong>🧼 After Use Maintenance</strong></p>																					
+				<ul>																					
+					<li>Run the outboard through fresh water (using the tank and hose) to flush out salt.</li>																				
+					<li>While flushing, switch off the fuel supply to allow the carburettor to drain.</li>																				
+				</ul>																					
+			</div>																						
+		</div>																							
+		<div class="card">																							
+			<h2>📖 Log Book & Manuals</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('arrival-logbook')">▶ View Details</div>																						
+			<div class="dropdown-content" id="arrival-logbook">																						
+				<ul>																					
+				<li>The log book/diary is kept either on the windowsill or in the hamper.</li>																					
+				<li>A copy of these notes and the ‘Cabin Departure Checklist’ instructions should be inside it.</li>																					
+				<li>Please add an entry to confirm your visit — this helps with insurance purposes.</li>																					
+				<li>A folder of manuals is kept on the shelf.</li>																					
+				</ul>																					
+			</div>																						
+		</div>																							
+	</div>																								
+																									
+	<div class="section" id="departure">																								
+		<div class="card">																							
+			<h2>✅ Cabin Departure Checklist</h2>																						
+			<div class="dropdown-header" onclick="toggleDropdown('departure-checklist')">▶ View Details</div>																						
+			<div class="dropdown-content" id="departure-checklist">																						
+				<p>To help keep the cabin stocked and functional for everyone, please run through the following before you leave:</p>																					
+																									
+				<p><strong>🛏️ Bedding</strong></p>																					
+				<ul>																					
+					<li>Strip used bedding.</li>																				
+					<li>Stack mattresses upright and apart to air.</li>																				
+					<li>Stack duvets, pillows, etc. over the beams as found.</li>																				
+					<li>Close all upper windows.</li>																				
+				</ul>																					
+																									
+				<p><strong>🍽️ Kitchen</strong></p>																					
+				<ul>																					
+					<li>Turn off the fridge tap (on the line under the hob).</li>																				
+					<li>Clean out the fridge and leave the door vent open to prevent mould.</li>																				
+					<li>Empty all rubbish:</li>																				
+				<ul>																					
+					<li>Compost → heap behind the rock near the fuel shed.</li>																				
+					<li>Burnable paper/card → burn on the beach below the high tide line.</li>																				
+					<li>Everything else → take away with you (mice use rubbish for bedding).</li>																				
+				</ul>																					
+					<li>Store boxes of tissues in the bathroom cupboard (to deter mice).</li>																				
+					<li>Do not leave perishables out. Only sealed, unopened food may stay in cupboards.</li>																				
+					<li>Clean out the stove and empty the ash tray onto the compost heap.</li>																				
+					<li>Refill logs, kindling, and smokeless fuel for the next visitors.</li>																				
+					<li>Please leave the kitchen and cabin clean and tidy — as you'd like to find it.</li>																				
+				</ul>																					
+																									
+				<p><strong>🚿 Porch & Bathroom</strong></p>																					
+				<ul>																					
+					<li>Turn off the boiler at the control knob.</li>																				
+					<li>In the gas cupboard, turn the valve to disconnect the gas bottles.</li>																				
+					<li><em>(Winter only):</em> Drain the boiler using the labelled drain point — use a bucket.</li>																				
+					<li>In the tall battery cupboard:</li>																				
+				<ul>																					
+					<li>Switch on the brake for the wind generator (labelled panel above batteries).</li>																				
+					<li>Turn the isolator switch on the outside of the cupboard to OFF.</li>																				
+				</ul>																					
+					<li>Lock and bolt the back door, and shut the window.</li>																				
+					<li>Hang the shower curtain over the rail.</li>																				
+					<li>Lock the porch door from inside the cabin, and leave the key in the drawer.</li>																				
+				</ul>																					
+																									
+				<p><strong>🛶 Boats & Outboard</strong></p>																					
+				<ul>																					
+					<li>Ensure all boats are padlocked.</li>																				
+					<li><strong>Tioram:</strong></li>																				
+				<ul>																					
+					<li>Pull up under the deck, bung out, and rinse with fresh water.</li>																				
+					<li>Run cable and padlock through the trolley, loop around one of the bench seats inside.</li>																				
+					<li>Prop the trolley so the weight is off the tyre and angled to drain via the bung.</li>																				
+				</ul>																					
+					<li>If an outboard was used, run it through with fresh water using the hose to clear salt from the system.</li>																				
+				</ul>																					
+																									
+				<p><strong>🛵 Quad Bike</strong></p>																					
+				<ul>																					
+					<li>Rinse the quad (and trailer, if used) with the hose.</li>																				
+					<li>Apply WD40 to working parts underneath.</li>																				
+					<li>Lock using the cable around the axle and pillar.</li>																				
+					<li>Replace the cover and straps as found.</li>																				
+				</ul>																					
+																									
+				<p><strong>🔐 Final Checks</strong></p>																					
+				<ul>																					
+					<li>Lock the shed.</li>																				
+					<li>Clean, lock, and cover the quad.</li>																				
+					<li>Drop the latch on the main door and use the deadlock.</li>																				
+				</ul>																					
+			</div>																						
+		</div>																							
+		<div class="card">																							
+			<h2>❗ Essentials</h2>																						
+				<p><strong>🔵 Gas Bottles (Butane/Propane)</strong></p>																					
+				<ul>																					
+					<li>If you empty a bottle or notice one is low, please take it with you to refill or let the group know.</li>																				
+					<li>Always leave a note in the group chat with how many full/empty bottles are on-site.</li>																				
+				</ul>																					
+																									
+				<p><strong>⛽ Petrol for the Outboard Motor</strong></p>																					
+				<ul>																					
+					<li>If you use petrol, please top up what you can.</li>																				
+					<li>Petrol degrades over time — ideally bring it in and out as needed.</li>																				
+					<li>If there’s any left, note the amount in the group chat for the next person.</li>																				
+				</ul>																					
+																									
+				<p><strong>🧻 General Supplies</strong></p>																					
+				<ul>																					
+					<li>If essentials like toilet paper, matches, or kindling are low, let the group know.</li>																				
+					<li>Leave the cabin stocked as best you can for the next visitor.</li>																				
+				</ul>																					
+																									
+			      <a href="https://docs.google.com/spreadsheets/d/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/edit?gid=121516545#gid=121516545" target="_blank">📊 Update Stock List</a>																						
+			</div>																						
+		</div>																							
+	</div>																								
+<script>																									
+function showSection(id) {																									
+document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));																									
+const el = document.getElementById(id);																									
+if (el) el.classList.add('active');																									
+}																									
+document.addEventListener('DOMContentLoaded', () => showSection('planning'));																									
+																									
+function toggleDropdown(id) {																									
+const content = document.getElementById(id);																									
+if (content) content.classList.toggle('show');																									
+}																									
+																									
+// Fetch and display stock																									
+fetch('https://opensheet.elk.sh/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/Stock%20Take')																									
+.then(res => res.json())																									
+.then(data => {																									
+const container = document.getElementById('stock-list');																									
+if (!container) return;																									
+container.innerHTML = '';																									
+data.forEach(row => {																									
+const level = row['Level']?.toLowerCase();																									
+const item = row['Item'];																									
+if (level === 'empty' || level === 'low') {																									
+const className = level === 'empty' ? 'out' : 'low';																									
+const div = document.createElement('div');																									
+div.className = `stock-item ${className}`;																									
+div.textContent = `${item} — ${level.toUpperCase()}`;																									
+container.appendChild(div);																									
+}																									
+});																									
+if (container.innerHTML === '') {																									
+container.textContent = 'Everything in stock!';																									
+}																									
+})																									
+.catch(() => {																									
+const container = document.getElementById('stock-list');																									
+if (container) container.textContent = 'Could not load stock list.';																									
+});																									
+// Fetch and display fuel levels																									
+fetch('https://opensheet.elk.sh/1Jgcqq7O_yqY4ucZz-tvZLVRQGiXVSsUEoEAd1bM6uuQ/Fuel')																									
+.then(res => res.json())																									
+.then(data => {																									
+const container = document.getElementById('fuel-status');																									
+if (!container) return;																									
+container.innerHTML = '';																									
+																									
+data.forEach(row => {																									
+const type = row['Type'];																									
+const level = row['Level']?.toLowerCase();																									
+if (type && level) {																									
+const div = document.createElement('div');																									
+div.className = `stock-item ${level === 'low' ? 'low' : level === 'empty' ? 'out' : ''}`;																									
+div.textContent = `${type}: ${level.toUpperCase()}`;																									
+container.appendChild(div);																									
+}																									
+});																									
+																									
+if (container.innerHTML === '') {																									
+container.textContent = 'All fuel levels normal.';																									
+}																									
+})																									
+.catch(() => {																									
+const container = document.getElementById('fuel-status');																									
+if (container) container.textContent = 'Could not load fuel levels.';																									
+});																									
+</script>																									
+</body>																									
+</html>																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
+																									
