@@ -107,7 +107,8 @@
 		</div>																							
 	</div>																								
 	
-	<div class="nav">																								
+	<div class="nav">	
+		<div id="nav-welcome" onclick="showSection('welcome')">Welcome</div>																							
 		<div id="nav-planning" onclick="showSection('planning')">Planning</div>																							
 		<div id="nav-arrival" onclick="showSection('arrival')">Arrival</div>																							
 		<div id="nav-departure" onclick="showSection('departure')">Departure</div>																							
@@ -631,8 +632,8 @@ function showSection(id) {
 	if (navTab) navTab.classList.add('selected');
 }
 
-document.addEventListener('DOMContentLoaded', () => showSection('planning'));
-
+document.addEventListener('DOMContentLoaded', () => showSection('welcome'));
+	
 function toggleDropdown(id) {
 	const content = document.getElementById(id);
 	if (content) content.classList.toggle('show');
