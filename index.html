@@ -16,20 +16,26 @@
 			.header {
 				text-align: center;
 				padding: 2rem 1rem 1rem;
+				background-color: #fef6ee; /* soft parchment tone */
+				border-bottom: 4px solid #a46b45;
 			}
-		
+			
 			.header img {
-				max-width: 160px;
-				margin-bottom: 1rem;
-				border-radius: 12px;
-				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+				max-width: 240px;
+				width: 100%;
+				margin-bottom: 1.5rem;
+				border-radius: 0; /* remove the rounded background */
+				box-shadow: none; /* no box-shadow */
 			}
-		
+			
 			.header h2 {
+				font-size: 2.4rem;
+				color: #3e2e1e;
+				font-family: 'Georgia', serif;
+				font-weight: 700;
 				margin: 0;
-				font-size: 2rem;
-				color: #fbdf93;
 			}
+
 		
 			.header p {
 				max-width: 500px;
@@ -42,30 +48,26 @@
 			.nav {
 				display: flex;
 				justify-content: center;
-				background-color: #5b1200;
-				font-family: 'Helvetica Neue', sans-serif;
-				border-radius: 12px;
-				margin: 1rem auto;
-				width: fit-content;
-				overflow: hidden;
+				background-color: #6a4e3b;
+				color: #fff;
+				width: 100%;
 			}
-		
+			
 			.nav div {
-				padding: 12px 24px;
+				flex: 1;
+				text-align: center;
+				padding: 14px 0;
 				cursor: pointer;
-				color: #cf672f; /* unselected tab */
-				font-weight: bold;
+				font-weight: 600;
 				transition: background 0.2s ease;
 			}
-		
-			.nav .selected {
-				color: #fbdf93;
-				background-color: #5b1200;
+			
+			.nav div:hover {
+				background-color: #5c3e2e;
 			}
-		
-			.section {
-				display: none;
-				padding: 24px 16px;
+			
+			.nav .selected {
+				background-color: #4d382b;
 			}
 		
 			.section.active {
